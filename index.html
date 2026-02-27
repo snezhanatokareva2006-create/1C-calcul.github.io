@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1С:Калькулятор | Онлайн-Консалтинг</title>
+    
+    <!-- Современные шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка с логотипом -->
+        <div class="header">
+            <div class="logo">
+                <i class="fa-solid fa-calculator"></i>
+                <h1>1С:Калькулятор услуг</h1>
+            </div>
+            <p class="subtitle">ООО "Онлайн-Консалтинг", Уфа • Официальный партнер 1С</p>
+        </div>
+
+        <!-- Вкладки -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('hourly')">
+                <i class="fa-regular fa-clock"></i> Почасовая
+            </button>
+            <button class="tab-button" onclick="showTab('packages')">
+                <i class="fa-solid fa-box"></i> Пакеты
+            </button>
+            <button class="tab-button" onclick="showTab('fixed')">
+                <i class="fa-solid fa-gear"></i> Типовые
+            </button>
+            <button class="tab-button" onclick="showTab('its')">
+                <i class="fa-solid fa-file-lines"></i> ИТС
+            </button>
+            <button class="tab-button cart-tab" onclick="showTab('cart')">
+                <i class="fa-solid fa-basket-shopping"></i> Корзина
+                <span class="cart-badge" id="cartBadge">0</span>
+            </button>
+        </div>
+
+        <!-- Вкладка 1: Почасовая -->
+        <div id="hourly" class="tab-content active">
+            <div class="tab-header">
+                <i class="fa-regular fa-clock"></i>
+                <h3>Разовые работы / Поддержка</h3>
+            </div>
+            
+            <div class="form-card">
+                <label for="hourlyService">
+                    <i class="fa-regular fa-user"></i> Выберите тип специалиста:
+                </label>
+                <select id="hourlyService">
+                    <option value="2500">Консультант (в офисе / удаленно) — 2 500 ₽/час</option>
+                    <option value="3000">Программист — 3 000 ₽/час</option>
+                    <option value="3000">Отраслевые конфигурации (Колледж, Аптека, ЖКХ, УПП) — 3 000 ₽/час</option>
+                    <option value="3000">Консультант вечером/выходные — 3 000 ₽/час</option>
+                    <option value="3500">Программист вечером/выходные — 3 500 ₽/час</option>
+                    <option value="5000">Сервисный выезд (черта города, вечер/выходные) — 5 000 ₽/час</option>
+                    <option value="2500">Технический специалист (удаленно) — 2 500 ₽/час</option>
+                </select>
+
+                <label for="hourlyCount">
+                    <i class="fa-regular fa-hourglass"></i> Количество часов:
+                </label>
+                <input type="number" id="hourlyCount" min="0.5" step="0.5" value="1">
+
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="isOnSite">
+                        <span class="checkbox-custom"></span>
+                        Выезд к заказчику (мин. 2 часа)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="isEveningWeekend">
+                        <span class="checkbox-custom"></span>
+                        Вечернее/выходные (если не выбрано в списке)
+                    </label>
+                </div>
+
+                <button class="btn-add" onclick="addHourlyToCart()">
+                    <i class="fa-solid fa-cart-plus"></i> Добавить в корзину
+                </button>
+            </div>
+        </div>
+
+        <!-- Вкладка 2: Пакеты -->
+        <div id="packages" class="tab-content">
+            <div class="tab-header">
+                <i class="fa-solid fa-box"></i>
+                <h3>Пакеты часов (экономия)</h3>
+            </div>
+            
+            <div class="form-card">
+                <label for="packageType">
+                    <i class="fa-solid fa-tag"></i> Выберите пакет:
+                </label>
+                <select id="packageType">
+                    <option value="22000|10">Пакет 10 часов — 22 000 ₽ (2 200 ₽/час)</option>
+                    <option value="40000|20">Пакет 20 часов — 40 000 ₽ (2 000 ₽/час)</option>
+                </select>
+
+                <button class="btn-add" onclick="addPackageToCart()">
+                    <i class="fa-solid fa-cart-plus"></i> Добавить пакет в корзину
+                </button>
+                <p class="hint">📌 Пакет добавляется целиком</p>
+            </div>
+        </div>
+
+        <!-- Вкладка 3: Типовые работы -->
+        <div id="fixed" class="tab-content">
+            <div class="tab-header">
+                <i class="fa-solid fa-gear"></i>
+                <h3>Фиксированные работы и интеграции</h3>
+            </div>
+            
+            <div class="form-card">
+                <label for="fixedService">
+                    <i class="fa-regular fa-file-lines"></i> Выберите тип работы:
+                </label>
+                <select id="fixedService" size="6">
+                    <option value="11000">Переход с 7.7 на БП/БГУ/ЗУП — 11 000 ₽</option>
+                    <option value="5000">Переход с БП 2 на БП 3 — 5 000 ₽</option>
+                    <option value="10000">Переход с БГУ 1 на БГУ 2 — 10 000 ₽</option>
+                    <option value="10000">Переход с ЗУП 2.5 на ЗУП 3 — 10 000 ₽</option>
+                    <option value="10000">Свертка базы (БП, БГУ) — 10 000 ₽</option>
+                    <option value="15000">Свертка базы (ЗУП, ЗГУ) — от 15 000 ₽</option>
+                    <option value="9500">Свертка базы (1С:Аптека) — 9 500 ₽</option>
+                    <option value="7000">Синхронизация ЗУП/ЗГУ с БП/БГУ — 7 000 ₽</option>
+                    <option value="7000">Синхронизация УНФ/УТ с БП — 7 000 ₽</option>
+                    <option value="9000">Синхронизация БГУ с Аптека/Диетпитание — от 9 000 ₽</option>
+                    <option value="6000">Внешняя печатная форма (БП, УТ, УНФ) — от 6 000 ₽</option>
+                    <option value="7000">Внешняя печатная форма (ЗУП, ЗГУ) — от 7 000 ₽</option>
+                    <option value="8000">Внешняя печатная форма (1С:Фреш) — от 8 000 ₽</option>
+                    <option value="10000">Web-публикация — 10 000 ₽</option>
+                    <option value="5000">Настройка ККТ с 1С — 5 000 ₽</option>
+                    <option value="7000">Интеграция с НПО Криста — 7 000 ₽</option>
+                    <option value="17000">Интеграция с Честным знаком — 17 000 ₽</option>
+                    <option value="35000">Перенос 1С с сервера на сервер — от 35 000 ₽</option>
+                </select>
+
+                <label for="fixedQty">
+                    <i class="fa-solid fa-repeat"></i> Количество:
+                </label>
+                <input type="number" id="fixedQty" min="1" value="1">
+
+                <button class="btn-add" onclick="addFixedToCart()">
+                    <i class="fa-solid fa-cart-plus"></i> Добавить в корзину
+                </button>
+            </div>
+        </div>
+
+        <!-- Вкладка 4: ИТС / Подписка -->
+        <div id="its" class="tab-content">
+            <div class="tab-header">
+                <i class="fa-solid fa-file-lines"></i>
+                <h3>1С:ИТС / Комплект поддержки</h3>
+            </div>
+            
+            <div class="form-card">
+                <label for="itsCategory">
+                    <i class="fa-solid fa-layer-group"></i> Выберите раздел:
+                </label>
+                <select id="itsCategory" onchange="updateItsServices()">
+                    <option value="">-- Выберите раздел --</option>
+                    <option value="prof">1С:КП ПРОФ (коммерция)</option>
+                    <option value="budget">1С:КП Бюджет ПРОФ</option>
+                    <option value="medicine">1С:КП Медицина</option>
+                    <option value="special">Льготный договор (8+4)</option>
+                    <option value="remote">Удаленные офисы</option>
+                    <option value="industry">Отраслевой (по категориям)</option>
+                    <option value="licenses">Сопровождение лицензий (шт)</option>
+                    <option value="institution">Сопровождение учреждений</option>
+                </select>
+
+                <div id="itsServiceContainer" style="display: none;">
+                    <label for="itsService">Выберите услугу:</label>
+                    <select id="itsService" onchange="showItsParams()"></select>
+                </div>
+
+                <div id="itsParams" class="its-params" style="display: none;"></div>
+
+                <button class="btn-add" onclick="addItsToCart()" id="itsAddBtn" style="display: none;">
+                    <i class="fa-solid fa-cart-plus"></i> Добавить в корзину
+                </button>
+            </div>
+        </div>
+
+        <!-- Вкладка 5: Корзина / Квитанция -->
+        <div id="cart" class="tab-content">
+            <div class="tab-header">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <h3>Квитанция на оплату</h3>
+            </div>
+            
+            <div class="cart-actions">
+                <button class="btn-clear" onclick="clearCart()">
+                    <i class="fa-regular fa-trash-can"></i> Очистить всё
+                </button>
+                <button class="btn-word" onclick="generateWord()">
+                    <i classfa-regular fa-file-word"></i> Скачать Word
+                </button>
+            </div>
+
+            <!-- Таблица квитанции -->
+            <div class="receipt" id="receipt">
+                <div class="receipt-header">
+                    <div>№</div>
+                    <div>Наименование услуги</div>
+                    <div>Кол-во</div>
+                    <div>Цена</div>
+                    <div>Сумма</div>
+                    <div></div>
+                </div>
+                <div id="receiptItems" class="receipt-items">
+                    <!-- Сюда будут добавляться товары -->
+                </div>
+                <div class="receipt-total" id="receiptTotal">
+                    ИТОГО: 0 ₽
+                </div>
+            </div>
+
+            <div class="cart-empty" id="cartEmpty" style="display: flex;">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <p>Корзина пуста. Добавьте услуги из других вкладок.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

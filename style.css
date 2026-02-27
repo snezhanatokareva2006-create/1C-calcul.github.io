@@ -1,0 +1,674 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FFF9E6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: #1A1A1A;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 32px 32px 0 0;
+    box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.1);
+    padding: 24px 20px;
+    margin-top: 20px;
+}
+
+/* ==================== ШАПКА ==================== */
+.header {
+    margin-bottom: 24px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.logo i {
+    font-size: 28px;
+    color: #E31B23;
+    background-color: #FFD700;
+    padding: 10px;
+    border-radius: 16px;
+}
+
+.logo h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #E31B23;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 13px;
+    font-weight: 500;
+    padding-left: 48px;
+}
+
+/* ==================== ВКЛАДКИ ==================== */
+.tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+    background-color: #FFF3D6;
+    padding: 6px;
+    border-radius: 50px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-button {
+    background: transparent;
+    border: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    border-radius: 40px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.tab-button i {
+    font-size: 14px;
+}
+
+.tab-button.active {
+    background-color: #E31B23;
+    color: white;
+    box-shadow: 0 4px 10px rgba(227, 27, 35, 0.2);
+}
+
+.cart-tab {
+    position: relative;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background-color: #FFD700;
+    color: #E31B23;
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+}
+
+/* ==================== КОНТЕНТ ==================== */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.tab-header i {
+    font-size: 20px;
+    color: #E31B23;
+    background-color: #FFD700;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.tab-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1A1A1A;
+}
+
+/* ==================== ФОРМЫ ==================== */
+.form-card {
+    background-color: #FFFCF5;
+    border: 1px solid #FFE5B4;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin: 16px 0 6px 0;
+    font-size: 14px;
+}
+
+select, input[type="number"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #FFD700;
+    border-radius: 16px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    background-color: white;
+    color: #1A1A1A;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E31B23' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: #E31B23;
+}
+
+select[size] {
+    padding: 8px;
+    background-image: none;
+}
+
+select[size] option {
+    padding: 12px;
+    border-radius: 8px;
+    margin: 2px 0;
+}
+
+/* ==================== ЧЕКБОКСЫ ==================== */
+.checkbox-group {
+    margin: 16px 0 8px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.checkbox-label input {
+    display: none;
+}
+
+.checkbox-custom {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #FFD700;
+    border-radius: 7px;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.checkbox-label input:checked + .checkbox-custom {
+    background-color: #E31B23;
+    border-color: #E31B23;
+}
+
+.checkbox-label input:checked + .checkbox-custom::after {
+    content: "✓";
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+}
+
+/* ==================== КНОПКИ ==================== */
+.btn-add {
+    background-color: #FFD700;
+    color: #1A1A1A;
+    border: none;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.btn-add:active {
+    background-color: #E6C200;
+    transform: scale(0.98);
+}
+
+.btn-clear, .btn-word {
+    border: none;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+    flex: 1;
+}
+
+.btn-clear {
+    background-color: #F5F5F5;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+.btn-clear:active {
+    background-color: #E8E8E8;
+}
+
+.btn-word {
+    background-color: #2B5797;
+    color: white;
+}
+
+.btn-word:active {
+    background-color: #1E3F6F;
+    transform: scale(0.98);
+}
+
+.hint {
+    color: #888;
+    font-size: 13px;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ==================== КОРЗИНА ==================== */
+.cart-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.receipt {
+    background-color: #FFFCF5;
+    border: 2px solid #FFD700;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 16px;
+}
+
+.receipt-header {
+    display: none; /* Скрываем на мобилках */
+}
+
+.receipt-items {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.receipt-item {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border-bottom: 1px solid #FFE5B4;
+    position: relative;
+}
+
+.receipt-item:last-child {
+    border-bottom: none;
+}
+
+.receipt-item .item-number {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 24px;
+    height: 24px;
+    background-color: #FFD700;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    color: #E31B23;
+}
+
+.receipt-item .item-name {
+    font-weight: 600;
+    font-size: 15px;
+    margin-left: 32px;
+    margin-bottom: 8px;
+    padding-right: 30px;
+}
+
+.receipt-item .item-details {
+    color: #666;
+    font-size: 12px;
+    margin-left: 32px;
+    margin-bottom: 12px;
+}
+
+.receipt-item .item-prices {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 32px;
+}
+
+.receipt-item .item-quantity {
+    color: #666;
+    font-size: 14px;
+}
+
+.receipt-item .item-price {
+    font-weight: 600;
+    color: #E31B23;
+    font-size: 16px;
+}
+
+.receipt-item .item-remove {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: #999;
+    cursor: pointer;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.receipt-total {
+    background-color: #FFD700;
+    padding: 16px;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    border-top: 2px solid #E6C200;
+    color: #1A1A1A;
+}
+
+.cart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    background-color: #FFFCF5;
+    border-radius: 20px;
+    border: 2px dashed #FFD700;
+    gap: 12px;
+}
+
+.cart-empty i {
+    font-size: 48px;
+    color: #FFD700;
+}
+
+.cart-empty p {
+    color: #666;
+    font-size: 15px;
+    text-align: center;
+}
+
+/* ==================== ИТС ПАРАМЕТРЫ ==================== */
+.its-params {
+    background-color: #FFF3D6;
+    border-radius: 16px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.param-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.param-row label {
+    margin: 0;
+    font-size: 14px;
+}
+
+.param-row input {
+    width: 100%;
+}
+
+.info-block {
+    background-color: #FFD700;
+    border-left: 4px solid #E31B23;
+    padding: 12px;
+    border-radius: 10px;
+    margin: 12px 0;
+    font-size: 13px;
+    color: #1A1A1A;
+}
+
+/* ==================== СПЕЦИАЛЬНО ДЛЯ ТЕЛЕФОНОВ ==================== */
+@media screen and (max-width: 480px) {
+    body {
+        background-color: #FFF9E6;
+        padding: 0;
+        align-items: stretch;
+    }
+    
+    .container {
+        max-width: 100%;
+        border-radius: 0;
+        margin-top: 0;
+        padding: 16px;
+        box-shadow: none;
+        min-height: 100vh;
+    }
+    
+    /* Шапка */
+    .logo {
+        gap: 8px;
+    }
+    
+    .logo i {
+        font-size: 24px;
+        padding: 8px;
+    }
+    
+    .logo h1 {
+        font-size: 20px;
+    }
+    
+    .subtitle {
+        font-size: 11px;
+        padding-left: 40px;
+    }
+    
+    /* Вкладки - всегда видимые */
+    .tabs {
+        position: sticky;
+        top: 0;
+        background-color: #FFF3D6;
+        z-index: 10;
+        margin: 0 -16px 20px -16px;
+        padding: 8px 16px;
+        border-radius: 0;
+        width: calc(100% + 32px);
+    }
+    
+    .tab-button {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+    
+    /* Формы */
+    .form-card {
+        padding: 16px;
+    }
+    
+    select, input[type="number"] {
+        padding: 14px;
+        font-size: 16px; /* Предотвращает зум на iPhone */
+    }
+    
+    /* Кнопки */
+    .btn-add {
+        padding: 16px;
+        font-size: 16px;
+    }
+    
+    .btn-clear, .btn-word {
+        padding: 14px;
+        font-size: 14px;
+    }
+    
+    /* Корзина */
+    .cart-actions {
+        position: sticky;
+        top: 60px;
+        background-color: white;
+        z-index: 9;
+        padding: 8px 0;
+        margin: 0 -16px 16px -16px;
+        padding: 8px 16px;
+        width: calc(100% + 32px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .receipt-item {
+        padding: 16px 12px;
+    }
+    
+    .receipt-item .item-number {
+        width: 22px;
+        height: 22px;
+        font-size: 11px;
+    }
+    
+    .receipt-item .item-name {
+        font-size: 14px;
+        margin-right: 25px;
+    }
+    
+    .receipt-item .item-price {
+        font-size: 15px;
+    }
+    
+    .receipt-total {
+        font-size: 18px;
+        padding: 14px;
+    }
+    
+    /* Пустая корзина */
+    .cart-empty {
+        padding: 40px 20px;
+    }
+    
+    .cart-empty i {
+        font-size: 44px;
+    }
+    
+    /* Убираем hover эффекты на телефонах */
+    .btn-add:hover,
+    .btn-clear:hover,
+    .btn-word:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    /* Добавляем активные состояния для touch */
+    .tab-button:active {
+        background-color: #E31B23;
+        color: white;
+    }
+    
+    .btn-add:active {
+        background-color: #E6C200;
+    }
+    
+    .btn-word:active {
+        background-color: #1E3F6F;
+    }
+    
+    .btn-clear:active {
+        background-color: #E8E8E8;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media screen and (max-width: 360px) {
+    .logo h1 {
+        font-size: 18px;
+    }
+    
+    .tab-button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .tab-button i {
+        font-size: 12px;
+    }
+    
+    .receipt-item .item-name {
+        font-size: 13px;
+    }
+    
+    .receipt-item .item-price {
+        font-size: 14px;
+    }
+}
+
+/* Для безопасной зоны iPhone */
+@supports (padding: max(0px)) {
+    .container {
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+        padding-bottom: max(16px, env(safe-area-inset-bottom));
+    }
+    
+    .tabs {
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+    }
+    
+    .cart-actions {
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+    }
+}
